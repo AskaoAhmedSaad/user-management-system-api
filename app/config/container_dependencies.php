@@ -14,8 +14,11 @@ return [
       'GetUsersRepository' => [
            'class' =>  'app\modules\api\repositories\users\GetUsersRepository'
       ],
-      'app\modules\api\repositories\users\AssignUserToGroupRepositoryInterface' => [
-          'class' =>  'app\modules\api\repositories\users\AssignUserToGroupRepository'
+      'GetUserGroupRelationRepository' => [
+           'class' =>  'app\modules\api\repositories\xusergroup\GetUserGroupRelationRepository'
+      ],
+      'app\modules\api\repositories\xusergroup\XUserGroupRepositoryInterface' => [
+          'class' =>  'app\modules\api\repositories\xusergroup\XUserGroupRepository'
       ],
       'validatorFactory' => [
           'class' =>  'app\modules\api\components\requestsValidators\dependencies\ValidatorFactory'
@@ -26,8 +29,8 @@ return [
       'CreateUserRequestValidator' => [
           'class' =>  'app\modules\api\components\requestsValidators\CreateUserRequestValidator'
       ],
-      'AssignUserToGroupRequestValidator' => [
-          'class' =>  'app\modules\api\components\requestsValidators\AssignUserToGroupRequestValidator'
+      'XUserGroupRequestValidator' => [
+          'class' =>  'app\modules\api\components\requestsValidators\XUserGroupRequestValidator'
       ],
       'SuccessResponse' => [
           'class' =>  'app\modules\api\components\responses\SuccessResponse'
