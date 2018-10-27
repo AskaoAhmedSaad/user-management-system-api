@@ -8,8 +8,13 @@ return [
     [
         'class' => 'yii\rest\UrlRule',
         'controller' => ['users' => 'api/users'],
+    ],
+    [
+        'class' => 'yii\rest\UrlRule',
+        'controller' => ['xusergroup' => 'api/x-user-group'],
         'extraPatterns' => [
-            'PATCH <id>/assign-to-group' => 'assign-to-group',
-    	]
+            'POST assign-to-group' => 'assign-to-group',
+            'DELETE remove-from-group' => 'remove-from-group'
+        ]
     ]
 ];
