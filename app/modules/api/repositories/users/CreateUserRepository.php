@@ -43,6 +43,7 @@ class CreateUserRepository implements CreatingRepositoryInterface
             }
         } catch (Exception $e) {
             $transaction->rollBack();
+            Yii::$app->response->statusCode = 422;
             return $this->errorResponse->getResponse($e->getMessage());
         } 
     }

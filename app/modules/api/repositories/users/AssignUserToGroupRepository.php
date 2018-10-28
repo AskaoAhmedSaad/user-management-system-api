@@ -26,10 +26,9 @@ class AssignUserToGroupRepository implements AssignUserToGroupRepositoryInterfac
 
     /**
      *  assign user to group
-     * @param Array $params creating params
-     * @param int $id of the user
+     * @param Array $params assigning params
      **/
-    public function assign(int $id, Array $params)
+    public function assign(Array $params)
     {
         $transaction = Yii::$app->db->beginTransaction();
         try {
@@ -37,7 +36,7 @@ class AssignUserToGroupRepository implements AssignUserToGroupRepositoryInterfac
             if ($requestValidatorError = $this->requestValidator->getValidationErrors()) {
                 return $this->errorResponse->getResponse($requestValidatorError);
             } else {
-                if ($this->model = $this->getUsersRepository->getOne($id)) {
+                if ($this->model = $this->getUsersRepository->getOne($params['user_id'])) {
                     if ($this->model->group_id == $params['group_id']) {
                         throw new Exception('the user already in the group', 1);
                     }
@@ -45,12 +44,11 @@ class AssignUserToGroupRepository implements AssignUserToGroupRepositoryInterfac
                     $this->persist();
                     $transaction->commit();
                     return $this->successResponse->getResponse($this->model);
-                } else {
-                    throw new Exception("The user in not found!", 1);
                 }
             }
         } catch (Exception $e) {
             $transaction->rollBack();
+            Yii::$app->response->statusCode = 422;
             return $this->errorResponse->getResponse($e->getMessage());
         } 
     }

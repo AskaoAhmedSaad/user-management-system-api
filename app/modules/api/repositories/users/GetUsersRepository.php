@@ -25,11 +25,4 @@ class GetUsersRepository implements GettingRepositoryInterface
         
         return $query->one();
     }
-
-    public function getGroupUsers(int $groupId)
-    {
-        $query = Users::find()->where(['group_id' => $groupId, 'deleted' => 0]);
-        
-        return $query->all();
-    }
 }

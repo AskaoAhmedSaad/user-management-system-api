@@ -7,5 +7,5 @@ namespace app\modules\api\repositories\users;
 
 interface AssignUserToGroupRepositoryInterface
 {
-    public function assign(int $id, Array $params);
+    public function assign(Array $params);
 }
