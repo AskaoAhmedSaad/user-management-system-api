@@ -13,14 +13,14 @@ class DeleteGroupRepository implements DeletingRepositoryInterface
 {
     protected $model;
     protected $getGroupsRepository;
-    protected $getUsersRepository;
+    protected $getUserGroupRelationRepository;
     protected $successResponse;
     protected $errorResponse;
 
     public function __construct()
     {
         $this->getGroupsRepository = Yii::$container->get('GetGroupsRepository');
-        $this->getUsersRepository = Yii::$container->get('GetUsersRepository');
+        $this->getUserGroupRelationRepository = Yii::$container->get('GetUserGroupRelationRepository');
         $this->successResponse = Yii::$container->get('SuccessResponse');
         $this->errorResponse = Yii::$container->get('ErrorResponse');
     }
@@ -34,7 +34,7 @@ class DeleteGroupRepository implements DeletingRepositoryInterface
         $transaction = Yii::$app->db->beginTransaction();
         try {
             if ($this->model = $this->getGroupsRepository->getOne($id)) {
-                if ($groupUsers = $this->getUsersRepository->getGroupUsers($id)) {
+                if ($this->getUserGroupRelationRepository->getGroupUsersCount($id) > 0) {
                     throw new Exception("The group has user and can't be deleted!", 1);                
                 } else {
                     $this->model->deleted = true;
@@ -47,6 +47,7 @@ class DeleteGroupRepository implements DeletingRepositoryInterface
             }
         } catch (Exception $e) {
             $transaction->rollBack();
+            Yii::$app->response->statusCode = 422;
             return $this->errorResponse->getResponse($e->getMessage());
         } 
     }
