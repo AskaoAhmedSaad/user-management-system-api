@@ -5,6 +5,8 @@ use ApiTester;
 use \Codeception\Util\HttpCode;
 use Faker\Factory;
 use app\tests\fixtures\Groups\GroupsFixture;
+use app\tests\fixtures\Users\UsersFixture;
+use app\tests\fixtures\XUserGroup\XUserGroupFixture;
 
 class GroupsCest
 {
@@ -31,6 +33,14 @@ class GroupsCest
             'groups' => [
                 'class' => GroupsFixture::className(),
                 'dataFile' => 'tests/fixtures/Groups/data/groups.php'
+            ],
+            'users' => [
+                'class' => UsersFixture::className(),
+                'dataFile' => 'tests/fixtures/Users/data/users.php'
+            ],
+            'x_user_group' => [
+                'class' => XUserGroupFixture::className(),
+                'dataFile' => 'tests/fixtures/XUserGroup/data/x_user_group.php'
             ],
         ];
     }
@@ -73,21 +83,30 @@ class GroupsCest
         $I->seeResponseContains("has already been taken");
     }
 
-    public function testPositiveDeleteUser(ApiTester $I)
+    public function testPositiveDeleteGroup(ApiTester $I)
     {
-        $I->wantTo('test positive deleting user');
-        $I->sendDelete('groups/1');
+        $I->wantTo('test positive deleting group');
+        $I->sendDelete('groups/2');
         $I->seeResponseCodeIs(HttpCode::OK); // 200
         $I->seeResponseIsJson();
     }
 
-    public function testNegativeDeleteUserAlreadyDeleted(ApiTester $I)
+    public function testNegativeDeleteGroupAlreadyDeleted(ApiTester $I)
     {
-        $I->wantTo('test positive deleting user');
-        $I->sendDelete('groups/1');
-        $I->sendDelete('groups/1');
+        $I->wantTo('test negative delete group already deleted');
+        $I->sendDelete('groups/2');
+        $I->sendDelete('groups/2');
         $I->seeResponseCodeIs(HttpCode::UNPROCESSABLE_ENTITY); // 422
         $I->seeResponseIsJson();
         $I->seeResponseContains("The group in not found!");
+    }
+
+    public function testNegativeDeleteGroupWhichHaveUsers(ApiTester $I)
+    {
+        $I->wantTo('test negative delete group which have users');
+        $I->sendDelete('groups/1');
+        $I->seeResponseCodeIs(HttpCode::UNPROCESSABLE_ENTITY); // 422
+        $I->seeResponseIsJson();
+        $I->seeResponseContains("The group has user and can't be deleted!");
     }
 }
