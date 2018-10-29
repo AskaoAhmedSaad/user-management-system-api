@@ -1,0 +1,229 @@
+{
+	"id": "1e062b8a-f5ba-4c1b-9db1-c0a89448e58d",
+	"name": "users mangment system",
+	"description": "",
+	"auth": null,
+	"events": null,
+	"variables": [],
+	"order": [],
+	"folders_order": [
+		"4c7ba4cd-dc39-423e-a869-1f0121741a60",
+		"d0303138-d1a1-4b3c-9ee2-948a44b532fa",
+		"829865d4-3753-47b1-8589-788daab0a2ee"
+	],
+	"folders": [
+		{
+			"id": "d0303138-d1a1-4b3c-9ee2-948a44b532fa",
+			"name": "groups",
+			"description": "",
+			"auth": null,
+			"events": null,
+			"collection": "1e062b8a-f5ba-4c1b-9db1-c0a89448e58d",
+			"folder": null,
+			"order": [
+				"1afa54dd-9569-4481-bd01-0c61b31adf0d",
+				"f7d518f7-7cb3-484a-9325-e9ca4476c320"
+			],
+			"folders_order": []
+		},
+		{
+			"id": "4c7ba4cd-dc39-423e-a869-1f0121741a60",
+			"name": "users",
+			"description": "",
+			"auth": null,
+			"events": null,
+			"collection": "1e062b8a-f5ba-4c1b-9db1-c0a89448e58d",
+			"folder": null,
+			"order": [
+				"67d5a55f-6969-4d3d-95d9-1fcd76bef269",
+				"4c9b9675-b90e-4fac-b332-d77154dfbf3f"
+			],
+			"folders_order": []
+		},
+		{
+			"id": "829865d4-3753-47b1-8589-788daab0a2ee",
+			"name": "xusergroup",
+			"description": "",
+			"auth": null,
+			"events": null,
+			"collection": "1e062b8a-f5ba-4c1b-9db1-c0a89448e58d",
+			"folder": null,
+			"order": [
+				"3c8c0c8f-d925-4e81-b8c5-f78d79372a16",
+				"680bb09b-bfe3-4d51-8e64-889538f9d7e8"
+			],
+			"folders_order": []
+		}
+	],
+	"requests": [
+		{
+			"id": "1afa54dd-9569-4481-bd01-0c61b31adf0d",
+			"name": "create new group",
+			"url": "users.dev/groups",
+			"description": "",
+			"data": [
+				{
+					"key": "name",
+					"value": "managers",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": "d0303138-d1a1-4b3c-9ee2-948a44b532fa",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "3c8c0c8f-d925-4e81-b8c5-f78d79372a16",
+			"name": "assign user to group",
+			"url": "users.dev/xusergroup",
+			"description": "",
+			"data": [
+				{
+					"key": "group_id",
+					"value": "1",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "user_id",
+					"value": "1",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/x-www-form-urlencoded",
+					"description": ""
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": "829865d4-3753-47b1-8589-788daab0a2ee",
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "4c9b9675-b90e-4fac-b332-d77154dfbf3f",
+			"name": "delete user",
+			"url": "users.dev/users/1",
+			"description": "",
+			"data": null,
+			"dataMode": "params",
+			"headerData": [],
+			"method": "DELETE",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": "4c7ba4cd-dc39-423e-a869-1f0121741a60",
+			"headers": "",
+			"pathVariables": {}
+		},
+		{
+			"id": "67d5a55f-6969-4d3d-95d9-1fcd76bef269",
+			"name": "create new user",
+			"url": "users.dev/users",
+			"description": "",
+			"data": [
+				{
+					"key": "name",
+					"value": "Ahmed",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"method": "POST",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": "4c7ba4cd-dc39-423e-a869-1f0121741a60",
+			"headers": "Content-Type: application/json\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "680bb09b-bfe3-4d51-8e64-889538f9d7e8",
+			"name": "remove user from group",
+			"url": "users.dev/xusergroup/remove-from-group",
+			"description": "",
+			"data": [
+				{
+					"key": "group_id",
+					"value": "1",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "user_id",
+					"value": "1",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/x-www-form-urlencoded"
+				}
+			],
+			"method": "DELETE",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": "829865d4-3753-47b1-8589-788daab0a2ee",
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"pathVariables": {}
+		},
+		{
+			"id": "f7d518f7-7cb3-484a-9325-e9ca4476c320",
+			"name": "delete group",
+			"url": "users.dev/groups/1",
+			"description": "",
+			"data": null,
+			"dataMode": "params",
+			"headerData": [],
+			"method": "DELETE",
+			"pathVariableData": [],
+			"queryParams": [],
+			"auth": null,
+			"events": [],
+			"folder": "d0303138-d1a1-4b3c-9ee2-948a44b532fa",
+			"headers": "",
+			"pathVariables": {}
+		}
+	]
+}
