@@ -8,5 +8,9 @@ return [
     [
         "id" => 2,
         "name" => "Mark"
+    ],
+    [
+        "id" => 3,
+        "name" => "Frank"
     ]
 ];
