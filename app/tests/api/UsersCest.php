@@ -80,6 +80,7 @@ class UsersCest
         $I->sendDelete('users/1');
         $I->seeResponseCodeIs(HttpCode::OK); // 200
         $I->seeResponseIsJson();
+        $I->seeResponseContainsJson(["deleted" => true]);
     }
 
     public function testNegativeDeleteUserAlreadyDeleted(ApiTester $I)
