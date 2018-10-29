@@ -89,6 +89,7 @@ class GroupsCest
         $I->sendDelete('groups/2');
         $I->seeResponseCodeIs(HttpCode::OK); // 200
         $I->seeResponseIsJson();
+        $I->seeResponseContainsJson(["deleted" => true]);
     }
 
     public function testNegativeDeleteGroupAlreadyDeleted(ApiTester $I)
