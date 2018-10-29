@@ -3,6 +3,8 @@
 namespace app\modules\api\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "x_user_group".
@@ -16,7 +18,7 @@ use Yii;
  * @property Groups $group
  * @property Users $user
  */
-class XUserGroup extends \yii\db\ActiveRecord
+class XUserGroup extends ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -36,6 +38,18 @@ class XUserGroup extends \yii\db\ActiveRecord
             [['group_id', 'user_id', 'crdate', 'tstamp'], 'integer'],
             [['group_id'], 'exist', 'skipOnError' => true, 'targetClass' => Groups::className(), 'targetAttribute' => ['group_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => Users::className(), 'targetAttribute' => ['user_id' => 'id']],
+        ];
+    }
+
+    public function behaviors() {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['crdate', 'tstamp'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['tstamp'],
+                ]
+            ],
         ];
     }
 

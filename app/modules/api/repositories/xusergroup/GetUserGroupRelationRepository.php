@@ -17,4 +17,11 @@ class GetUserGroupRelationRepository
         
         return $query->one();
     }
+
+    public function getGroupUsersCount(int $groupId)
+    {
+        $query = XUserGroup::find()->where(['group_id' => $groupId]);
+        
+        return (int)$query->count();
+    }
 }

@@ -5,24 +5,28 @@ namespace app\modules\api\controllers;
 use Yii;
 use yii\rest\Controller;
 use Exception;
-use app\modules\api\repositories\xusergroup\XUserGroupRepositoryInterface;
+use app\modules\api\repositories\xusergroup\CreateXUserGroupRepository;
+use app\modules\api\repositories\xusergroup\DeleteXUserGroupRepository;
 
 class XUserGroupController extends Controller
 {
-    protected $xUserGroupRepository;
+    protected $createXUserGroupRepository;
+    protected $deleteXUserGroupRepository;
 
-    public function __construct($id, $module, XUserGroupRepositoryInterface $xUserGroupRepository, $config = [])
+    public function __construct($id, $module, CreateXUserGroupRepository $createXUserGroupRepository, 
+                                    DeleteXUserGroupRepository $deleteXUserGroupRepository, $config = [])
     {
-        $this->xUserGroupRepository = $xUserGroupRepository;
+        $this->createXUserGroupRepository = $createXUserGroupRepository;
+        $this->deleteXUserGroupRepository = $deleteXUserGroupRepository;
         parent::__construct($id, $module, $config);
     }
 
     /**
      * assign user to group
      **/
-    public function actionAssignToGroup()
+    public function actionCreate()
     {
-        return $this->xUserGroupRepository->assign(Yii::$app->request->post());
+        return $this->createXUserGroupRepository->create(Yii::$app->request->post());
     }
 
     /**
@@ -30,7 +34,7 @@ class XUserGroupController extends Controller
      **/
     public function actionRemoveFromGroup()
     {
-        return $this->xUserGroupRepository->remove(Yii::$app->request->post());
+        return $this->deleteXUserGroupRepository->remove(Yii::$app->request->post());
     }
 
 }
