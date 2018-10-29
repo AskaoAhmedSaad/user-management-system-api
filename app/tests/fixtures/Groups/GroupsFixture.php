@@ -1,5 +1,5 @@
 <?php
-namespace tests\fixtures\Groups;
+namespace app\tests\fixtures\Groups;
 
 use yii\test\ActiveFixture;
 

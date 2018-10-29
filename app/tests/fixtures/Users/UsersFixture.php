@@ -1,4 +1,5 @@
 <?php
+
 namespace app\tests\fixtures\Users;
 
 use yii\test\ActiveFixture;
