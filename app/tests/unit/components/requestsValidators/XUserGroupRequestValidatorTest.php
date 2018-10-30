@@ -19,32 +19,34 @@ class XUserGroupRequestValidatorTest extends TestCase
 
     public function testGetValidationErrors()
     {
-        $this->specify("test getValidationErrors() with valid params");
-        $this->xUserGroupRequestValidator->load([
-                    'group_id' => 1,
-                    'user_id' => 1
-                ], '');
-        $requestValidatorErrors = $this->xUserGroupRequestValidator->getValidationErrors();
-        $this->assertEmpty($requestValidatorErrors);
-        $this->assertInternalType('array', $requestValidatorErrors);
+        $this->specify("test getValidationErrors() with valid params", function() {
+            $this->xUserGroupRequestValidator->load([
+                        'group_id' => 1,
+                        'user_id' => 1
+                    ], '');
+            $requestValidatorErrors = $this->xUserGroupRequestValidator->getValidationErrors();
+            $this->assertEmpty($requestValidatorErrors);
+            $this->assertInternalType('array', $requestValidatorErrors);
+        });
 
-        $this->specify("test getValidationErrors() with Invalid params");
-        $this->xUserGroupRequestValidator->load([
-                    'group_id' => null,
-                    'user_id' => 1
-                ], '');
-        $requestValidatorErrors = $this->xUserGroupRequestValidator->getValidationErrors();
-        $this->assertInternalType('array', $requestValidatorErrors);
-        $this->assertNotEmpty($requestValidatorErrors);
-        $this->assertTrue($requestValidatorErrors['group_id'][0] == 'The group id field is required.');
+        $this->specify("test getValidationErrors() with Invalid params", function() {
+            $this->xUserGroupRequestValidator->load([
+                        'group_id' => null,
+                        'user_id' => 1
+                    ], '');
+            $requestValidatorErrors = $this->xUserGroupRequestValidator->getValidationErrors();
+            $this->assertInternalType('array', $requestValidatorErrors);
+            $this->assertNotEmpty($requestValidatorErrors);
+            $this->assertTrue($requestValidatorErrors['group_id'][0] == 'The group id field is required.');
 
-        $this->xUserGroupRequestValidator->load([
-                    'group_id' => 'ffff',
-                    'user_id' => 1
-                ], '');
-        $requestValidatorErrors = $this->xUserGroupRequestValidator->getValidationErrors();
-        $this->assertInternalType('array', $requestValidatorErrors);
-        $this->assertNotEmpty($requestValidatorErrors);
-        $this->assertTrue($requestValidatorErrors['group_id'][0] == 'The group id must be an integer.');
+            $this->xUserGroupRequestValidator->load([
+                        'group_id' => 'ffff',
+                        'user_id' => 1
+                    ], '');
+            $requestValidatorErrors = $this->xUserGroupRequestValidator->getValidationErrors();
+            $this->assertInternalType('array', $requestValidatorErrors);
+            $this->assertNotEmpty($requestValidatorErrors);
+            $this->assertTrue($requestValidatorErrors['group_id'][0] == 'The group id must be an integer.');
+        });
     }
 }

@@ -40,23 +40,26 @@ class GetUserGroupRelationRepositoryTest extends TestCase
 
     public function testGettingExistedUserAndGroupRel()
     {
-        $this->specify("test existed user and group relation");
-        $userAndGroupRel = $this->getUserGroupRelationRepository->GetUserAndGroupRel(1, 1);
-        $this->assertNotNull($userAndGroupRel);
+        $this->specify("test existed user and group relation", function() { 
+            $userAndGroupRel = $this->getUserGroupRelationRepository->GetUserAndGroupRel(1, 1);
+            $this->assertNotNull($userAndGroupRel);
+        });
     }
 
     public function testGettingNonExistedUserAndGroupRel()
     {
-        $this->specify("test non existed user and group relation");
-        $userAndGroupRel = $this->getUserGroupRelationRepository->GetUserAndGroupRel(1, 2);
-        $this->assertNull($userAndGroupRel);
+        $this->specify("test non existed user and group relation", function() {
+            $userAndGroupRel = $this->getUserGroupRelationRepository->GetUserAndGroupRel(1, 2);
+            $this->assertNull($userAndGroupRel);
+        });
     }
 
     public function testGetGroupUsersCount()
     {
-        $this->specify("test getting group users count");
-        $count = $this->getUserGroupRelationRepository->getGroupUsersCount(1);
-        $this->assertInternalType('int', $count);
-        $this->assertEquals($count, 2);
+        $this->specify("test getting group users count", function() {
+            $count = $this->getUserGroupRelationRepository->getGroupUsersCount(1);
+            $this->assertInternalType('int', $count);
+            $this->assertEquals($count, 2);
+        });
     }
 }

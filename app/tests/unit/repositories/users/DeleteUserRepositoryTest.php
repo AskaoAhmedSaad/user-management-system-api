@@ -29,9 +29,10 @@ class DeleteUserRepositoryTest extends TestCase
 
     public function testDeleteUser()
     {
-        $this->specify("test deleting user");
-        $data = $this->deleteUserRepository->delete(1);
-        $this->assertNotNull($data);
-        $this->assertTrue($data['data']['deleted'] == 1);
+        $this->specify("test deleting user", function() {
+            $data = $this->deleteUserRepository->delete(1);
+            $this->assertNotNull($data);
+            $this->assertTrue($data['data']['deleted'] == 1);
+        });
     }
 }
