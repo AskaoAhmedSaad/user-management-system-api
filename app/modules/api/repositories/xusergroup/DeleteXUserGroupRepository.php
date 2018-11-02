@@ -49,7 +49,7 @@ class DeleteXUserGroupRepository
         } catch (Exception $e) {
             $transaction->rollBack();
             Yii::$app->response->statusCode = 422;
-            return $this->errorResponse->getResponse($e->getMessage());
+            return $this->errorResponse->getResponse("something wrong happen, please contact the support");
         } 
     }
 }
