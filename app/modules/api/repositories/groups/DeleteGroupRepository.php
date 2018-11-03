@@ -35,6 +35,7 @@ class DeleteGroupRepository implements DeletingRepositoryInterface
         try {
             if ($this->model = $this->getGroupsRepository->getOne($id)) {
                 if ($this->getUserGroupRelationRepository->getGroupUsersCount($id) > 0) {
+                    $transaction->rollBack();
                     throw new Exception("The group has user and can't be deleted!", 1);                
                 } else {
                     $this->model->deleted = true;

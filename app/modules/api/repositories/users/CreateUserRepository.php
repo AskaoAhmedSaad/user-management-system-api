@@ -33,6 +33,7 @@ class CreateUserRepository implements CreatingRepositoryInterface
         try {
             $this->requestValidator->load($params, '');
             if ($requestValidatorError = $this->requestValidator->getValidationErrors()) {
+                $transaction->rollBack();
                 return $this->errorResponse->getResponse($requestValidatorError);
             } else {
                 $this->model = new Users;

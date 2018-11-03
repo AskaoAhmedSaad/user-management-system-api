@@ -34,6 +34,7 @@ class DeleteXUserGroupRepository
         try {
             $this->requestValidator->load($params, '');
             if ($requestValidatorError = $this->requestValidator->getValidationErrors()) {
+                $transaction->rollBack();
                 return $this->errorResponse->getResponse($requestValidatorError);
             } else {
                 if ($this->model = $this->getUserGroupRelationRepository->getUserAndGroupRel($params['group_id'], $params['user_id'])) {

@@ -38,6 +38,7 @@ class CreateXUserGroupRepository implements CreatingRepositoryInterface
                 return $this->errorResponse->getResponse($requestValidatorError);
             } else {
                 if ($this->model = $this->getUserGroupRelationRepository->getUserAndGroupRel($params['group_id'], $params['user_id'])) {
+                    $transaction->rollBack();
                     throw new Exception('the user already in the group', 1);
                 } else {
                     $this->model = new XUserGroup;

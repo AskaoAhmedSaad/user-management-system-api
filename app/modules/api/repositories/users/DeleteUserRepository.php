@@ -37,6 +37,7 @@ class DeleteUserRepository implements DeletingRepositoryInterface
                 $transaction->commit();
                 return $this->successResponse->getResponse($this->model);
             } else {
+                $transaction->rollBack();
                 throw new Exception("The user in not found!", 1);
             }
         } catch (Exception $e) {
